@@ -50,6 +50,39 @@
   to { transform: rotate(360deg); }
 }
 
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes rotate-border {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes perspective-float {
+  0%, 100% { 
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+  33% { 
+    transform: translateY(-5px) rotateX(2deg) rotateY(1deg);
+  }
+  66% { 
+    transform: translateY(-8px) rotateX(-1deg) rotateY(-2deg);
+  }
+}
+
 /* Animation classes */
 .animate-float {
   animation: float 3s ease-in-out infinite;
@@ -61,6 +94,36 @@
 
 .animate-slowspin {
   animation: slowspin 20s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: slowspin 8s linear infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-rotate-border {
+  animation: rotate-border 4s linear infinite;
+}
+
+.animate-perspective-float {
+  animation: perspective-float 6s ease-in-out infinite;
+}
+
+/* 3D perspective utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .cursive {

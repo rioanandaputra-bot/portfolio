@@ -165,84 +165,84 @@ const About = () => {
             ))}
           </div>
           
-            <div className="relative z-10 grid grid-cols-1 gap-8 items-center">
-              <div className="space-y-8">
-                {/* Bio Text with Enhanced Typography */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light tracking-wide select-text">
-                    {personalInfo.detailedBio}
-                  </p>
-                </motion.div>
-                
-                {/* Enhanced Highlights Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {personalInfo.highlights.map((highlight, index) => (
-                    <motion.div 
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                      whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                      transition={{ 
-                        delay: 0.4 + index * 0.1,
-                        type: "spring",
-                        stiffness: 100
-                      }}
-                      whileHover={{ 
-                        scale: 1.05, 
-                        y: -5,
-                        rotateX: 10,
-                        transition: { duration: 0.2 }
-                      }}
-                      className="group/highlight cursor-pointer perspective-1000"
-                    >
-                      <div className="relative p-4 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10 border border-purple-500/20 rounded-xl hover:border-orange-500/30 transition-all duration-300 transform-gpu hover:shadow-lg hover:shadow-purple-500/10 overflow-hidden">
-                        {/* Shimmer effect */}
-                        <div className="absolute inset-0 -top-2 -left-2 w-[calc(100%+16px)] h-[calc(100%+16px)] bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover/highlight:translate-x-full transition-transform duration-700"></div>
-                        
-                        <div className="relative z-10 flex items-center space-x-3">
-                          <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full group-hover/highlight:from-orange-400 group-hover/highlight:to-pink-400 transition-all duration-300 animate-pulse"></div>
-                          <span className="text-purple-200 font-medium select-text group-hover/highlight:text-orange-200 transition-colors duration-300">
-                            {highlight}
-                          </span>
-                        </div>
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-8 items-center">
+            <div className="lg:col-span-3 space-y-8">
+              {/* Bio Text with Enhanced Typography */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light tracking-wide select-text">
+                  {personalInfo.detailedBio}
+                </p>
+              </motion.div>
+              
+              {/* Enhanced Highlights Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {personalInfo.highlights.map((highlight, index) => (
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                    whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    transition={{ 
+                      delay: 0.4 + index * 0.1,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -5,
+                      rotateX: 10,
+                      transition: { duration: 0.2 }
+                    }}
+                    className="group/highlight cursor-pointer perspective-1000"
+                  >
+                    <div className="relative p-4 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10 border border-purple-500/20 rounded-xl hover:border-orange-500/30 transition-all duration-300 transform-gpu hover:shadow-lg hover:shadow-purple-500/10 overflow-hidden">
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 -top-2 -left-2 w-[calc(100%+16px)] h-[calc(100%+16px)] bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover/highlight:translate-x-full transition-transform duration-700"></div>
+                      
+                      <div className="relative z-10 flex items-center space-x-3">
+                        <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full group-hover/highlight:from-orange-400 group-hover/highlight:to-pink-400 transition-all duration-300 animate-pulse"></div>
+                        <span className="text-purple-200 font-medium select-text group-hover/highlight:text-orange-200 transition-colors duration-300">
+                          {highlight}
+                        </span>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-                
-                {/* Achievements Grid - Second Row */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-                  {[
-                    { number: personalInfo.stats.experience, label: "Years Experience", icon: "⭐", color: "from-purple-500 to-purple-600" },
-                    { number: personalInfo.stats.projects, label: "Projects Built", icon: "🚀", color: "from-cyan-500 to-cyan-600" },
-                    { number: personalInfo.stats.clients, label: "Happy Clients", icon: "😊", color: "from-green-500 to-green-600" },
-                    { number: personalInfo.stats.technologies, label: "Technologies", icon: "💻", color: "from-orange-500 to-orange-600" },
-                  ].map((stat, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6 + index * 0.2 }}
-                      whileHover={{ scale: 1.1, rotate: [0, -2, 2, 0] }}
-                      className="text-center p-6 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-purple-500/30 transition-all duration-300 cursor-pointer group/stat"
-                    >
-                      <div className="text-3xl mb-2 group-hover/stat:animate-bounce">
-                        {stat.icon}
-                      </div>
-                      <div className={`text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.color} mb-2 group-hover/stat:scale-110 transition-transform duration-300`}>
-                        {stat.number}
-                      </div>
-                      <div className="text-gray-300 text-sm font-medium group-hover/stat:text-white transition-colors duration-300">
-                        {stat.label}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
+
+            {/* Enhanced Stats Section */}
+            <div className="space-y-6">
+              {[
+                { number: personalInfo.stats.experience, label: "Years Experience", icon: "⭐", color: "from-purple-500 to-purple-600" },
+                { number: personalInfo.stats.projects, label: "Projects Built", icon: "🚀", color: "from-cyan-500 to-cyan-600" },
+                { number: personalInfo.stats.clients, label: "Happy Clients", icon: "😊", color: "from-green-500 to-green-600" },
+                { number: personalInfo.stats.technologies, label: "Technologies", icon: "💻", color: "from-orange-500 to-orange-600" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 + index * 0.2 }}
+                  whileHover={{ scale: 1.1, rotate: [0, -2, 2, 0] }}
+                  className="text-center p-6 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-purple-500/30 transition-all duration-300 cursor-pointer group/stat"
+                >
+                  <div className="text-3xl mb-2 group-hover/stat:animate-bounce">
+                    {stat.icon}
+                  </div>
+                  <div className={`text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.color} mb-2 group-hover/stat:scale-110 transition-transform duration-300`}>
+                    {stat.number}
+                  </div>
+                  <div className="text-gray-300 text-sm font-medium group-hover/stat:text-white transition-colors duration-300">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         {/* Enhanced Services Section with Interactive Cards */}

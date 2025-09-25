@@ -7,16 +7,24 @@ export const personalInfo = {
   phone: "+62 XXX-XXXX-XXXX",
   location: "Indonesia",
   bio: "Full Stack Software Engineer specializing in scalable web applications and mobile solutions. I transform complex business requirements into elegant, user-centered digital experiences using cutting-edge technologies.",
-  detailedBio: "Passionate Full Stack Developer with 3+ years of experience building scalable web applications and mobile solutions. I specialize in React.js, Next.js, and Node.js, with a strong focus on creating seamless user experiences and robust backend systems. My expertise spans from frontend architecture to database optimization.",
+  detailedBio: "Passionate Full Stack Developer specializing in React.js, Next.js, and Node.js with a strong focus on creating seamless user experiences and robust backend systems. My expertise spans from frontend architecture to database optimization, transforming complex business requirements into elegant digital solutions.",
   resumeUrl: "/resume.pdf",
   highlights: [
-    "3+ Years Experience",
-    "Full Stack Expertise", 
-    "20+ Projects Delivered",
     "Performance Optimization",
-    "Team Leadership",
-    "Agile Methodologies"
+    "Team Leadership", 
+    "Agile Methodologies",
+    "Cross-platform Development",
+    "UI/UX Design",
+    "DevOps Integration"
   ],
+  
+  // Stats - Avoid hardcoding these in components
+  stats: {
+    experience: "3+",
+    projects: "50+",
+    clients: "20+",
+    technologies: "15+"
+  },
   
   // Social Links - Update with your actual social media profiles
   social: {
@@ -362,15 +370,18 @@ export const languages = [
   },
 ];
 
-// Interests/Hobbies
+// Interests/Hobbies - Enhanced with more engaging descriptions
 export const interests = [
-  "Full Stack Architecture",
-  "Mobile App Innovation",
-  "Open Source Contribution",
-  "Technical Writing",
-  "Cloud Computing",
-  "UI/UX Design",
-  "Continuous Learning",
+  "🏗️ System Architecture & Scalability",
+  "📱 Mobile-First Innovation",
+  "🌍 Open Source Contribution",
+  "✍️ Technical Writing & Mentoring",
+  "☁️ Cloud Computing & DevOps",
+  "🎨 UI/UX Design Excellence",
+  "🚀 Emerging Tech Exploration",
+  "💡 Creative Problem Solving",
+  "🤝 Community Building",
+  "📊 Data-Driven Development"
 ];
 
 // Blog Posts - Update with your actual blog posts
