@@ -116,7 +116,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             <h2 className="text-2xl font-bold text-white mb-4">Key Concepts</h2>
             <p className="text-gray-300 leading-relaxed mb-6">
               This section delves into the fundamental concepts and principles that form 
-              the foundation of the topic. We'll explore practical examples and real-world 
+              the foundation of the topic. We&apos;ll explore practical examples and real-world 
               applications to ensure a thorough understanding.
             </p>
 

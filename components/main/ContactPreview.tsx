@@ -23,7 +23,7 @@ const ContactPreview = () => {
         className="w-full max-w-4xl px-6 text-center relative z-10"
       >
         <h2 className="text-[32px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-6">
-          Let's Work Together
+          Let&apos;s Work Together
         </h2>
         
         <div className="bg-gradient-to-br from-[#0300145e] via-[#0300148a] to-[#0300145e] border border-[#7042f861] rounded-2xl p-8 relative overflow-hidden">
@@ -31,8 +31,8 @@ const ContactPreview = () => {
           
           <div className="relative z-10">
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Ready to bring your ideas to life? I'm available for freelance projects, 
-              full-time opportunities, and exciting collaborations. Let's discuss how we can work together!
+              Ready to bring your ideas to life? I&apos;m available for freelance projects, 
+              full-time opportunities, and exciting collaborations. Let&apos;s discuss how we can work together!
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 text-sm">

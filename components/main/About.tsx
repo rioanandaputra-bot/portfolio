@@ -100,14 +100,16 @@ const About = () => {
     });
   };
 
-  // Auto-rotate quotes
+  // Auto-rotate quotes - optimized to only run when component is in view
   useEffect(() => {
+    if (!isInView) return;
+    
     const interval = setInterval(() => {
       setCurrentQuote((prev) => (prev + 1) % inspirationalQuotes.length);
     }, 5000);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [isInView, inspirationalQuotes.length]);
 
   const tabs = [
     { id: "journey", label: "My Journey", icon: "🚀" },
@@ -124,16 +126,17 @@ const About = () => {
     >
       {/* Advanced Interactive Background */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Dynamic particle system */}
-        {[...Array(8)].map((_, i) => (
+        {/* Dynamic particle system - Only animate when in view */}
+        {isInView && [...Array(8)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-gradient-to-r from-purple-400/30 to-cyan-400/30 rounded-full"
+            initial={{ opacity: 0, scale: 0 }}
             animate={{
               x: [0, Math.cos(i) * 100, Math.sin(i) * 50, 0],
               y: [0, Math.sin(i) * 100, Math.cos(i) * 50, 0],
-              opacity: [0.3, 0.8, 0.4, 0.3],
-              scale: [1, 1.5, 0.8, 1],
+              opacity: [0, 0.3, 0.8, 0.4, 0.3],
+              scale: [0, 1, 1.5, 0.8, 1],
             }}
             transition={{
               duration: 8 + i * 2,
@@ -164,12 +167,12 @@ const About = () => {
               left: `${5 + i * 15}%`,
               top: `${10 + i * 15}%`,
             }}
-            animate={{
+            animate={isInView ? {
               x: mousePosition.x * (0.015 + i * 0.008),
               y: mousePosition.y * (0.015 + i * 0.008),
               scale: [1, 1.3, 1.1, 1],
               rotate: [0, 180, 360],
-            }}
+            } : {}}
             transition={{ 
               x: { type: "spring", damping: 40, stiffness: 50 },
               y: { type: "spring", damping: 40, stiffness: 50 },
@@ -228,7 +231,7 @@ const About = () => {
               className="text-center"
             >
               <p className="text-xl md:text-2xl text-gray-200 italic leading-relaxed mb-3 font-light tracking-wide">
-                "{inspirationalQuotes[currentQuote].text}"
+                &ldquo;{inspirationalQuotes[currentQuote].text}&rdquo;
               </p>
               <p className="text-purple-400 font-medium">
                 — {inspirationalQuotes[currentQuote].author}
@@ -240,6 +243,7 @@ const About = () => {
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: "120px" }}
+          viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 0.8 }}
           className="h-1 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto rounded-full"
         />
@@ -286,6 +290,7 @@ const About = () => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
                 className="w-full"
               >
@@ -294,16 +299,18 @@ const About = () => {
                   whileHover={{ rotateX: 2, rotateY: 2 }}
                   style={{ transformStyle: "preserve-3d" }}
                 >
-                  {/* Floating particles inside card */}
+                  {/* Floating particles inside card - Only animate when in view */}
                   <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(6)].map((_, i) => (
+                    {isInView && [...Array(6)].map((_, i) => (
                       <motion.div
                         key={i}
                         className="absolute w-1 h-1 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full opacity-30"
+                        initial={{ opacity: 0, scale: 0 }}
                         animate={{
                           x: [0, Math.random() * 60 - 30],
                           y: [0, Math.random() * 60 - 30],
-                          opacity: [0.3, 0.8, 0.3],
+                          opacity: [0, 0.3, 0.8, 0.3],
+                          scale: [0, 1],
                         }}
                         transition={{
                           duration: 5 + Math.random() * 3,
@@ -335,6 +342,7 @@ const About = () => {
                           key={index}
                           initial={{ opacity: 0, scale: 0.8 }}
                           whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
                           transition={{ delay: index * 0.1 }}
                           whileHover={{ scale: 1.05, rotate: [0, -1, 1, 0] }}
                           className="p-4 bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 border border-purple-500/20 rounded-xl hover:border-orange-500/30 transition-all duration-300 cursor-pointer group/highlight"
@@ -356,6 +364,7 @@ const About = () => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
                 className="w-full"
               >
@@ -368,6 +377,7 @@ const About = () => {
                       key={index}
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                       whileHover={{ scale: 1.05, rotateY: 5, y: -5 }}
                       className="p-6 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-purple-500/30 transition-all duration-300 cursor-pointer group/achievement relative overflow-hidden"
@@ -416,6 +426,7 @@ const About = () => {
                   key={index}
                   initial={{ opacity: 0, y: 30, rotateY: -30 }}
                   whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: index * 0.1, type: "spring" }}
                   whileHover={{ 
                     y: -10, 
@@ -475,6 +486,7 @@ const About = () => {
                       key={index}
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                       whileHover={{ scale: 1.05, rotate: 2 }}
                       className="p-4 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 border border-purple-500/20 rounded-xl hover:border-orange-500/30 transition-all duration-300 cursor-pointer group/interest"
@@ -501,6 +513,7 @@ const About = () => {
                       key={index}
                       initial={{ opacity: 0, x: -30 }}
                       whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
                       transition={{ delay: index * 0.2 }}
                       whileHover={{ scale: 1.05, x: 10 }}
                       className="flex justify-between items-center p-4 bg-gradient-to-r from-purple-500/5 to-cyan-500/5 border border-purple-500/20 rounded-xl hover:border-orange-500/30 transition-all duration-300 cursor-pointer group/language"

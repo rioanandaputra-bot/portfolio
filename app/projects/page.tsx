@@ -252,8 +252,8 @@ export default function ProjectsPage() {
               Interested in Working Together?
             </h2>
             <p className="text-gray-300 mb-8">
-              I'm always open to discussing new opportunities and exciting projects. 
-              Let's build something amazing together.
+              I&apos;m always open to discussing new opportunities and exciting projects. 
+              Let&apos;s build something amazing together.
             </p>
             <Link
               href="/#contact"

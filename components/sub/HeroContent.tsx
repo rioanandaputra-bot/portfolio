@@ -28,7 +28,7 @@ const HeroContent = () => {
       setCurrentRole((prev) => (prev + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [roles.length]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
