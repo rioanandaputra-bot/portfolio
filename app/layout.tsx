@@ -4,12 +4,20 @@ import "./globals.css";
 import StarsCanvas from "@/components/main/StarBackground";
 import Navbar from "@/components/main/Navbar";
 import Footer from "@/components/main/Footer";
+import { personalInfo } from "@/constants/personalData";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Space Portfolio",
-  description: "This is my portfolio",
+  title: `${personalInfo.name} - ${personalInfo.title}`,
+  description: personalInfo.bio,
+  keywords: "Full Stack Developer, Web Developer, React, Next.js, Node.js, TypeScript, Portfolio",
+  authors: [{ name: personalInfo.name }],
+  openGraph: {
+    title: `${personalInfo.name} - ${personalInfo.title}`,
+    description: personalInfo.bio,
+    type: "website",
+  },
 };
 
 export default function RootLayout({
