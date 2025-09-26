@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { SparklesIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 import {
   Backend_skill,
   Frontend_skill,
@@ -99,7 +100,7 @@ const Skills = () => {
             whileHover={{ rotateY: 180 }}
             transition={{ duration: 0.6 }}
           >
-            <img
+            <Image
               src={skill.Image}
               alt={skill.skill_name}
               width={skill.width || 60}

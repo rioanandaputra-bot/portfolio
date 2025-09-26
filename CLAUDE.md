@@ -9,13 +9,15 @@ This is a personal portfolio website built with Next.js 13+ (App Router), TypeSc
 ## Development Commands
 
 ### Core Commands
-- **Development server**: `npm run dev` or `bun dev`
-- **Build**: `npm run build`
-- **Production server**: `npm start`
-- **Linting**: `npm run lint`
+- **Development server**: `bun run dev` (or `npm run dev`)
+- **Build**: `bun run build` (or `npm run build`)
+- **Production server**: `bun start` (or `npm start`)
+- **Linting**: `bun run lint` (or `npm run lint`)
 
 ### Package Management
-The project uses Bun as the primary package manager (evidenced by `bun.lock`). Use `bun install` for dependencies.
+The project supports both Bun and npm (evidenced by `bun.lock` and `package.json`). Bun is preferred for faster performance:
+- **Install dependencies**: `bun install` (preferred) or `npm install`
+- **Add dependency**: `bun add <package>` or `npm install <package>`
 
 ## Architecture Overview
 
@@ -47,6 +49,10 @@ components/
 constants/
 ├── personalData.ts   # Comprehensive personal data (MAIN CONFIG)
 └── index.ts         # Skills data and configuration
+
+utils/
+├── motion.ts         # Framer Motion configurations and variants
+└── animationOptimizations.ts  # Performance optimizations for 3D/animations
 ```
 
 ### Key Features
@@ -118,3 +124,24 @@ To update portfolio content, modify the relevant exports in `constants/personalD
 - Blog posts and educational content
 
 The component system will automatically reflect changes from the data layer without requiring component modifications.
+
+## Development Workflow
+
+### Making Content Changes
+1. **Personal Info**: Update `personalInfo` object in `constants/personalData.ts`
+2. **Adding Projects**: Add new entries to `projects` array with unique slugs
+3. **Work Experience**: Add entries to `workExperience` array with descriptive slugs
+4. **Skills**: Modify skill arrays in `constants/index.ts`
+5. **Blog Posts**: Add entries to `blogPosts` array (if implemented)
+
+### Adding New Components
+- Page-level components go in `components/main/`
+- Reusable components go in `components/sub/`
+- Follow existing patterns for data consumption from `constants/personalData.ts`
+- Use TypeScript interfaces for type safety
+
+### Performance Considerations
+- 3D animations use optimizations from `utils/animationOptimizations.ts`
+- Motion variants are centralized in `utils/motion.ts`
+- Videos use `.webm` format for better performance
+- Components use React Three Fiber for efficient 3D rendering
