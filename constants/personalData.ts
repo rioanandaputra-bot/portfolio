@@ -45,13 +45,44 @@ export const workExperience = [
     company: "Company Name",
     period: "2023 - Present",
     location: "Remote/Location",
+    slug: "senior-full-stack-developer-company-name",
+    summary: "Leading full-stack development initiatives and architecting scalable applications for enterprise clients",
     description: [
       "Architected and deployed scalable full-stack applications using React, Node.js, and MongoDB, serving 10K+ active users",
       "Led cross-functional development team of 3 engineers, implementing agile methodologies and code review processes",
       "Optimized application performance by 40% through advanced code refactoring and database query optimization",
       "Collaborated with product managers and UX designers to deliver user-centric solutions aligned with business objectives",
     ],
-    technologies: ["React", "Node.js", "MongoDB", "TypeScript", "Next.js"],
+    detailedDescription: [
+      "As a Senior Full Stack Developer, I spearhead the development of complex web applications that serve thousands of users daily. My role encompasses both technical leadership and hands-on development, ensuring our applications meet the highest standards of performance and user experience.",
+      
+      "One of my key achievements was architecting a microservices-based e-commerce platform that handles over 10,000 concurrent users. This involved designing robust APIs, implementing efficient database schemas, and ensuring seamless integration between frontend and backend systems.",
+      
+      "I take pride in mentoring junior developers and fostering a collaborative team environment. Through regular code reviews, pair programming sessions, and knowledge sharing meetings, I've helped build a strong development culture focused on continuous learning and improvement.",
+      
+      "My approach to problem-solving combines technical expertise with business acumen, always keeping the end-user experience at the forefront of development decisions."
+    ],
+    keyAchievements: [
+      "Reduced application load time by 60% through performance optimization",
+      "Implemented CI/CD pipeline reducing deployment time from 2 hours to 15 minutes",
+      "Led migration from monolith to microservices architecture",
+      "Established coding standards and review processes adopted company-wide"
+    ],
+    challenges: [
+      "Scaling database performance for high-traffic periods",
+      "Coordinating development across multiple time zones",
+      "Migrating legacy codebase without disrupting live services"
+    ],
+    technologies: ["React", "Node.js", "MongoDB", "TypeScript", "Next.js", "Docker", "AWS", "GraphQL"],
+    tools: ["VS Code", "Git", "Jira", "Figma", "Postman"],
+    teamSize: "5 developers, 2 designers, 1 PM",
+    reportingTo: "Engineering Manager",
+    keyMetrics: {
+      userGrowth: "300% increase in daily active users",
+      performance: "40% improvement in application performance", 
+      teamProductivity: "25% increase in sprint velocity",
+      codeQuality: "50% reduction in production bugs"
+    }
   },
   {
     id: 2,
@@ -59,13 +90,44 @@ export const workExperience = [
     company: "Previous Company",
     period: "2021 - 2023",
     location: "Location",
+    slug: "full-stack-developer-previous-company",
+    summary: "Developing responsive web applications and RESTful APIs while mentoring junior team members",
     description: [
       "Developed responsive web applications using modern JavaScript frameworks, achieving 95% client satisfaction",
       "Designed and implemented RESTful APIs with comprehensive database schemas using MySQL and PostgreSQL",
       "Executed agile development practices with Git version control, participating in sprint planning and retrospectives",
       "Mentored 2 junior developers through code reviews, knowledge sharing sessions, and technical guidance",
     ],
-    technologies: ["React", "Express.js", "MySQL", "PostgreSQL", "Docker"],
+    detailedDescription: [
+      "In my role as a Full Stack Developer, I was responsible for building and maintaining web applications that directly impacted our clients' business operations. Working in an agile environment, I collaborated closely with cross-functional teams to deliver high-quality solutions.",
+      
+      "I specialized in creating responsive, user-friendly interfaces while also developing robust backend systems. My work involved everything from database design to API development, ensuring seamless data flow and optimal user experiences.",
+      
+      "A significant part of my role involved mentoring junior developers, helping them grow their technical skills and understanding of best practices. This experience taught me valuable leadership skills and reinforced my own technical knowledge.",
+      
+      "Throughout this position, I consistently delivered projects on time while maintaining high code quality standards, contributing to our team's reputation for reliability and excellence."
+    ],
+    keyAchievements: [
+      "Achieved 95% client satisfaction rating across all projects",
+      "Successfully mentored 2 junior developers to mid-level positions",
+      "Delivered 15+ projects on time and within budget",
+      "Implemented automated testing reducing bug reports by 35%"
+    ],
+    challenges: [
+      "Working with legacy systems and gradual modernization",
+      "Balancing feature development with technical debt",
+      "Managing multiple client projects simultaneously"
+    ],
+    technologies: ["React", "Express.js", "MySQL", "PostgreSQL", "Docker", "JavaScript", "HTML5", "CSS3"],
+    tools: ["VS Code", "Git", "Trello", "Slack", "Chrome DevTools"],
+    teamSize: "3 developers, 1 designer",
+    reportingTo: "Senior Developer",
+    keyMetrics: {
+      clientSatisfaction: "95% satisfaction rating",
+      projectDelivery: "100% on-time delivery rate",
+      codeQuality: "35% reduction in bug reports",
+      mentorship: "2 junior developers promoted"
+    }
   },
   {
     id: 3,
@@ -73,13 +135,44 @@ export const workExperience = [
     company: "First Company",
     period: "2020 - 2021",
     location: "Location",
+    slug: "junior-web-developer-first-company",
+    summary: "Building responsive frontend interfaces and supporting backend development in my first professional role",
     description: [
       "Built responsive frontend interfaces using HTML5, CSS3, and vanilla JavaScript with cross-browser compatibility",
       "Supported backend development using PHP and MySQL, contributing to database design and API integration",
       "Conducted comprehensive testing and debugging procedures, reducing production bugs by 25%",
       "Acquired proficiency in modern development tools and industry best practices through continuous learning",
     ],
-    technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+    detailedDescription: [
+      "Starting my professional journey as a Junior Web Developer was both exciting and challenging. This role provided me with invaluable hands-on experience in web development fundamentals and introduced me to professional development practices.",
+      
+      "I focused primarily on frontend development, creating responsive and accessible user interfaces. Working with HTML5, CSS3, and JavaScript, I learned to build interfaces that work seamlessly across different browsers and devices.",
+      
+      "My involvement in backend development with PHP and MySQL gave me a comprehensive understanding of full-stack development. This experience was crucial in shaping my ability to think about applications holistically.",
+      
+      "The debugging and testing responsibilities taught me the importance of code quality and attention to detail. These skills became foundational to my approach to development throughout my career."
+    ],
+    keyAchievements: [
+      "Reduced production bugs by 25% through rigorous testing",
+      "Successfully completed all assigned projects within deadlines",
+      "Contributed to database design for 3 major features",
+      "Achieved cross-browser compatibility for all developed interfaces"
+    ],
+    challenges: [
+      "Learning professional development workflows and tools",
+      "Understanding complex existing codebases",
+      "Balancing learning with productivity expectations"
+    ],
+    technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL", "jQuery"],
+    tools: ["Sublime Text", "Git", "XAMPP", "Chrome DevTools", "FileZilla"],
+    teamSize: "2 developers, 1 senior developer",
+    reportingTo: "Senior Web Developer",
+    keyMetrics: {
+      bugReduction: "25% reduction in production bugs",
+      projectCompletion: "100% on-time project completion",
+      learningGrowth: "Mastered 6+ new technologies",
+      codeContribution: "Contributed to 10+ feature implementations"
+    }
   },
 ];
 
