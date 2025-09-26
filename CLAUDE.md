@@ -15,7 +15,7 @@ This is a personal portfolio website built with Next.js 13+ (App Router), TypeSc
 - **Linting**: `bun run lint` (or `npm run lint`)
 
 ### Package Management
-The project supports both Bun and npm (evidenced by `bun.lock` and `package.json`). Bun is preferred for faster performance:
+The project uses Bun as the primary package manager (evidenced by `bun.lock` file). npm is also supported. Bun is preferred for faster performance:
 - **Install dependencies**: `bun install` (preferred) or `npm install`
 - **Add dependency**: `bun add <package>` or `npm install <package>`
 

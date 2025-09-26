@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
@@ -15,8 +15,13 @@ import {
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState("frontend");
   const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const containerRef = useRef(null);
   const isInView = useInView(containerRef);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const skillCategories = {
     frontend: {
@@ -272,33 +277,46 @@ const Skills = () => {
 
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Animated particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-purple-500 rounded-full"
-            animate={{
-              x: [Math.random() * 1200, Math.random() * 1200],
-              y: [Math.random() * 800, Math.random() * 800],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-            }}
-            style={{
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-            }}
-          />
-        ))}
+        {/* Animated particles - reduced for performance */}
+        {isMounted && [...Array(10)].map((_, i) => {
+          // Use deterministic values based on index to avoid hydration issues
+          const seedX1 = (i * 123) % 1200;
+          const seedX2 = ((i + 1) * 456) % 1200;
+          const seedY1 = (i * 789) % 800;
+          const seedY2 = ((i + 2) * 321) % 800;
+          const duration = 15 + (i % 5);
+          const delay = i * 0.5;
+          const leftPos = (i * 37) % 100;
+          const topPos = (i * 63) % 100;
+
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-purple-500 rounded-full"
+              animate={{
+                x: [seedX1, seedX2],
+                y: [seedY1, seedY2],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration,
+                repeat: Infinity,
+                delay,
+                ease: "linear"
+              }}
+              style={{
+                left: leftPos + '%',
+                top: topPos + '%',
+              }}
+            />
+          );
+        })}
 
         {/* Background video */}
         <div className="absolute inset-0 z-[-10] opacity-20">
           <video
             className="w-full h-full object-cover"
-            preload="false"
+            preload="metadata"
             playsInline
             loop
             muted
