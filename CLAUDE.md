@@ -2,146 +2,89 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
-
-This is a personal portfolio website built with Next.js 13+ (App Router), TypeScript, and Tailwind CSS. It features a space-themed design with 3D animations using Three.js/React Three Fiber, showcasing personal projects, work experience, education, and blog content.
-
 ## Development Commands
 
-### Core Commands
-- **Development server**: `bun run dev` (or `npm run dev`)
-- **Build**: `bun run build` (or `npm run build`)
-- **Production server**: `bun start` (or `npm start`)
-- **Linting**: `bun run lint` (or `npm run lint`)
+### Core Development
+- `bun run dev` - Start development server (Next.js 13.5.6)
+- `bun run dev:turbo` - Start development server with Turbo mode
+- `bun run build` - Build for production
+- `bun run build:analyze` - Build with bundle analysis
+- `bun run start` - Start production server
+- `bun run lint` - Run ESLint
+- `bun run lint:fix` - Run ESLint with automatic fixes
+- `bun run type-check` - Run TypeScript type checking
+- `bun run clean` - Clean build artifacts
 
-### Package Management
-The project uses Bun as the primary package manager (evidenced by `bun.lock` file). npm is also supported. Bun is preferred for faster performance:
-- **Install dependencies**: `bun install` (preferred) or `npm install`
-- **Add dependency**: `bun add <package>` or `npm install <package>`
+### Utilities
+- `bun run optimize-images` - Optimize images using scripts/optimize-images.sh
 
-## Architecture Overview
+## Project Architecture
+
+### Tech Stack
+- **Framework**: Next.js 13.5.6 with App Router
+- **Language**: TypeScript with strict mode
+- **Styling**: Tailwind CSS with custom animations
+- **3D Graphics**: Three.js with React Three Fiber
+- **Icons**: React Icons and Heroicons
+- **Animation**: Framer Motion
+- **Build Tool**: Next.js built-in bundler with Turbo support
 
 ### Directory Structure
 ```
-app/                    # Next.js 13+ App Router
-├── page.tsx           # Homepage
-├── layout.tsx         # Root layout with navigation
-├── globals.css        # Global styles
+app/                    # Next.js App Router pages
 ├── about/             # About page
-├── projects/          # Projects listing + dynamic [slug] pages
-├── experience/        # Experience listing + dynamic [slug] pages
+├── blog/              # Blog pages
+├── contact/           # Contact page
 ├── education/         # Education page
-├── blog/             # Blog listing + dynamic [slug] pages
-└── contact/          # Contact page
+├── experience/        # Experience pages with dynamic routes
+├── projects/          # Project pages with dynamic routes
+├── globals.css        # Global styles
+├── layout.tsx         # Root layout with performance optimizations
+└── page.tsx           # Home page
 
 components/
-├── main/             # Page-level components
-│   ├── Hero.tsx      # Homepage hero with video background
-│   ├── Navbar.tsx    # Main navigation
-│   ├── Footer.tsx    # Site footer
-│   ├── StarBackground.tsx  # Animated star field background
-│   └── ...Preview.tsx      # Homepage section previews
-└── sub/              # Reusable sub-components
-    ├── HeroContent.tsx
-    ├── ProjectCard.tsx
-    └── SkillDataProvider.tsx
+├── main/              # Main page components (Hero, Navbar, Projects, etc.)
+└── sub/               # Reusable sub-components (ProjectCard, Breadcrumb, etc.)
 
 constants/
-├── personalData.ts   # Comprehensive personal data (MAIN CONFIG)
-└── index.ts         # Skills data and configuration
+├── index.ts           # Skill data and other constants
+└── personalData.ts    # Personal info, work experience, projects, education
 
-utils/
-├── motion.ts         # Framer Motion configurations and variants
-└── animationOptimizations.ts  # Performance optimizations for 3D/animations
+utils/                 # Utility functions for animations and performance
+hooks/                 # Custom React hooks
+public/               # Static assets (images, videos)
 ```
 
-### Key Features
-- **3D Animations**: Uses React Three Fiber (`@react-three/fiber`, `@react-three/drei`) for 3D elements
-- **Motion**: Framer Motion for animations and transitions
-- **Space Theme**: Video backgrounds (`blackhole.webm`), animated star fields, and cosmic imagery
-- **Dynamic Routes**: Slug-based routing for projects, experience, and blog posts
-- **Responsive Design**: Tailwind CSS with mobile-first approach
+### Key Configuration
+- **Path Mapping**: `@/*` points to root directory
+- **Image Optimization**: WebP/AVIF formats, multiple device sizes configured
+- **Performance**: Package imports optimized for react-icons and @heroicons/react
+- **TypeScript**: Strict mode with Next.js plugin
+- **Tailwind**: Custom animations (fade-in, slide-up, bounce-slow) and keyframes
 
-## Data Management
+### Data Management
+All personal data, projects, work experience, and educational information is centralized in `constants/personalData.ts`. This includes:
+- Personal information and social links
+- Work experience with detailed descriptions
+- Project portfolio with technical details
+- Education and certifications
+- Blog posts and skills
 
-### Primary Configuration
-All personal data is centralized in `constants/personalData.ts`:
-- `personalInfo`: Basic profile information
-- `workExperience`: Detailed job history with slugs for dynamic pages
-- `education`: Educational background
-- `projects`: Portfolio projects with categories and detailed descriptions
-- `blogPosts`: Blog content with metadata
-- `certifications`: Professional certifications
+### Performance Features
+- Dynamic imports for heavy components (StarBackground)
+- Image optimization with multiple formats and sizes
+- Performance monitoring scripts in layout
+- Resource preloading for critical assets
+- Lazy loading for 3D components
 
-### Skills Data
-Skills are defined in `constants/index.ts` with categorized arrays:
-- `Frontend_skill`: Frontend technologies
-- `Backend_skill`: Backend technologies
-- `Full_stack`: Full-stack tools and frameworks
-- `Other_skill`: Additional technologies
-
-### Dynamic Content
-- Projects, experience entries, and blog posts use slug-based routing
-- Each content type has detailed descriptions, achievements, and metadata
-- Categories and tags for filtering and organization
-
-## Development Guidelines
+### Component Organization
+- **Main components**: Page-level components in `components/main/`
+- **Sub components**: Reusable UI components in `components/sub/`
+- **Dynamic routing**: Projects and experience use slug-based routing
+- **Breadcrumb navigation**: Implemented for better UX
 
 ### Styling Approach
-- **Tailwind CSS**: Primary styling framework
-- **Dark Theme**: Space theme with dark backgrounds (`bg-[#030014]`)
-- **Custom Animations**: Framer Motion for page transitions and interactions
-- **3D Elements**: Three.js components for interactive backgrounds
-
-### Component Patterns
-- **Page Components**: Located in `components/main/` (e.g., `Hero.tsx`, `Projects.tsx`)
-- **Sub Components**: Reusable components in `components/sub/`
-- **Preview Components**: Homepage sections that link to full pages
-- **Data-Driven**: Components consume data from `constants/personalData.ts`
-
-### Asset Management
-- **Images**: Project screenshots, skill icons, and profile images in `public/`
-- **Videos**: Background videos (`.webm` format) for performance
-- **Icons**: SVG icons for social media and navigation
-- **Resume**: PDF resume accessible at `/resume.pdf`
-
-### Route Structure
-- Static pages: `/about`, `/contact`, `/education`
-- Dynamic pages: `/projects/[slug]`, `/experience/[slug]`, `/blog/[slug]`
-- Homepage sections: Each main component represents a homepage section
-
-### TypeScript Configuration
-- Strict mode enabled
-- Path aliases: `@/*` maps to project root
-- Next.js plugin for enhanced TypeScript support
-
-## Content Updates
-
-To update portfolio content, modify the relevant exports in `constants/personalData.ts`:
-- Personal information and social links
-- Work experience entries (remember to update slugs)
-- Project portfolio with categories
-- Blog posts and educational content
-
-The component system will automatically reflect changes from the data layer without requiring component modifications.
-
-## Development Workflow
-
-### Making Content Changes
-1. **Personal Info**: Update `personalInfo` object in `constants/personalData.ts`
-2. **Adding Projects**: Add new entries to `projects` array with unique slugs
-3. **Work Experience**: Add entries to `workExperience` array with descriptive slugs
-4. **Skills**: Modify skill arrays in `constants/index.ts`
-5. **Blog Posts**: Add entries to `blogPosts` array (if implemented)
-
-### Adding New Components
-- Page-level components go in `components/main/`
-- Reusable components go in `components/sub/`
-- Follow existing patterns for data consumption from `constants/personalData.ts`
-- Use TypeScript interfaces for type safety
-
-### Performance Considerations
-- 3D animations use optimizations from `utils/animationOptimizations.ts`
-- Motion variants are centralized in `utils/motion.ts`
-- Videos use `.webm` format for better performance
-- Components use React Three Fiber for efficient 3D rendering
+- Tailwind CSS with dark theme (`bg-[#030014]`)
+- Custom animations defined in tailwind.config.ts
+- Responsive design with mobile-first approach
+- Space-themed design with star background

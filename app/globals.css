@@ -3,6 +3,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global styles to prevent navbar whitespace issues */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for fixed navbar */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Prevent navbar from causing layout shifts */
+nav {
+  contain: layout style;
+  isolation: isolate;
+}
+
 /* Custom animations and utilities */
 @layer utilities {
   .line-clamp-3 {

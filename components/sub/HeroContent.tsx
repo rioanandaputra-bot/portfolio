@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   slideInFromLeft,
@@ -10,18 +10,19 @@ import {
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { personalInfo } from "@/constants/personalData";
+import { Button } from "@/components/ui/Button";
 
 const HeroContent = () => {
   const [currentRole, setCurrentRole] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
-  const roles = [
+
+  const roles = useMemo(() => [
     "Full Stack Developer",
-    "React Specialist", 
+    "React Specialist",
     "Node.js Expert",
     "UI/UX Enthusiast",
     "Mobile App Developer"
-  ];
+  ], []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,13 +31,14 @@ const HeroContent = () => {
     return () => clearInterval(interval);
   }, [roles.length]);
 
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    setMousePosition({ x: e.clientX, y: e.clientY });
+  }, []);
+
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [handleMouseMove]);
 
   return (
     <motion.div
@@ -112,24 +114,29 @@ const HeroContent = () => {
           
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6">
-            {personalInfo.highlights.slice(0, 4).map((highlight, index) => (
-              <motion.div
-                key={highlight}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.2 + index * 0.1 }}
-                className="text-center group cursor-pointer"
-              >
-                <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 group-hover:from-orange-400 group-hover:to-pink-400 transition-all duration-300">
-                  {highlight.includes('3+') && '3+'}
-                  {highlight.includes('20+') && '20+'}
-                  {!highlight.includes('+') && '✨'}
-                </div>
-                <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
-                  {highlight.replace('3+ ', '').replace('20+ ', '')}
-                </div>
-              </motion.div>
-            ))}
+            {personalInfo.highlights.slice(0, 4).map((highlight, index) => {
+              const hasExperience = highlight.includes('3+');
+              const hasProjects = highlight.includes('20+');
+              const displayValue = hasExperience ? '3+' : hasProjects ? '20+' : '✨';
+              const displayText = highlight.replace('3+ ', '').replace('20+ ', '');
+
+              return (
+                <motion.div
+                  key={highlight}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.2 + index * 0.1 }}
+                  className="text-center group cursor-pointer"
+                >
+                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 group-hover:from-orange-400 group-hover:to-pink-400 transition-all duration-300">
+                    {displayValue}
+                  </div>
+                  <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+                    {displayText}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
         
@@ -137,26 +144,24 @@ const HeroContent = () => {
           variants={slideInFromLeft(1)}
           className="flex flex-wrap gap-4 pt-4"
         >
-          <motion.a
+          <Button
             href="#contact"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative py-3 px-8 bg-gradient-to-r from-purple-600 to-cyan-600 text-white cursor-pointer rounded-xl font-semibold overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/25"
+            variant="primary"
+            size="lg"
+            className="group relative overflow-hidden hover:shadow-2xl hover:shadow-purple-500/25"
           >
             <span className="relative z-10">Start Collaboration</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </motion.a>
-          
-          <motion.a
+          </Button>
+
+          <Button
             href={personalInfo.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="py-3 px-8 border-2 border-purple-500/50 text-purple-300 cursor-pointer rounded-xl font-semibold hover:border-purple-400 hover:text-white hover:bg-purple-500/10 transition-all duration-300 backdrop-blur-sm"
+            variant="outline"
+            size="lg"
+            isExternal
+            className="backdrop-blur-sm"
           >
             Download Resume
-          </motion.a>
+          </Button>
         </motion.div>
       </div>
 
@@ -166,9 +171,13 @@ const HeroContent = () => {
       >
         <Image
           src="/mainIconsdark.svg"
-          alt="work icons"
+          alt="Technology icons and development tools illustration"
           height={650}
           width={650}
+          priority
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjUwIiBoZWlnaHQ9IjY1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3MDQyZjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiNDliZmYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjUwIiBoZWlnaHQ9IjY1MCIgZmlsbD0idXJsKCNhKSIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+"
         />
       </motion.div>
     </motion.div>
