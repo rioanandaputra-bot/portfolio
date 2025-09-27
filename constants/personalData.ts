@@ -10,12 +10,10 @@ export const personalInfo = {
   detailedBio: "Passionate Full Stack Developer specializing in React.js, Next.js, and Node.js with a strong focus on creating seamless user experiences and robust backend systems. My expertise spans from frontend architecture to database optimization, transforming complex business requirements into elegant digital solutions.",
   resumeUrl: "/resume.pdf",
   highlights: [
-    "Performance Optimization",
-    "Team Leadership", 
-    "Agile Methodologies",
-    "Cross-platform Development",
-    "UI/UX Design",
-    "DevOps Integration"
+    "Scalable",
+    "Secure",
+    "Reliable",
+    "Efficient",
   ],
   
   // Stats - Avoid hardcoding these in components

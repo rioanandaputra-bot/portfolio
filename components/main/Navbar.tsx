@@ -12,7 +12,8 @@ const Navbar = () => {
   const isClient = useIsClient();
 
   const handleScroll = useCallback(() => {
-    setIsScrolled(window.scrollY > 50);
+    const scrollY = window.scrollY;
+    setIsScrolled(scrollY > 50);
   }, []);
 
   useEffect(() => {
@@ -98,54 +99,79 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`w-full h-[75px] fixed top-0 left-0 shadow-lg z-50 transition-all duration-300 ${
+      className={`w-full h-[85px] fixed top-0 left-0 z-50 transition-all duration-500 ease-out ${
         isScrolled
-          ? 'bg-[#03001430] backdrop-blur-lg border-b border-[#7042f861] shadow-[#2A0E61]/80'
-          : 'bg-[#03001420] backdrop-blur-md shadow-[#2A0E61]/50'
+          ? 'bg-[#030014]/95 backdrop-blur-xl border-b border-[#7042f8]/30 shadow-2xl shadow-[#7042f8]/40'
+          : 'bg-[#030014]/70 backdrop-blur-md border-b border-[#7042f8]/10 shadow-xl shadow-[#7042f8]/25'
       }`}
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030014]/20 via-[#030014]/40 to-[#030014]/20"></div>
-      
-      <div className="w-full h-full flex items-center justify-between max-w-7xl mx-auto px-6 relative z-10">
+      {/* Cosmic Background Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#030014]/40 via-[#7042f8]/5 to-[#030014]/40"></div>
+
+      {/* Dark center gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#000000]/20 to-transparent"></div>
+
+      {/* Animated Border Glow */}
+      <div className={`absolute bottom-0 left-0 w-full h-[2px] transition-all duration-500 ${
+        isScrolled
+          ? 'bg-gradient-to-r from-transparent via-[#7042f8] to-transparent opacity-100 shadow-lg shadow-[#7042f8]/60'
+          : 'bg-gradient-to-r from-transparent via-[#7042f8]/60 to-transparent opacity-70 shadow-md shadow-[#7042f8]/40'
+      }`}></div>
+
+      {/* Top cosmic glow */}
+      <div className={`absolute top-0 left-0 w-full h-[1px] transition-all duration-500 ${
+        isScrolled
+          ? 'bg-gradient-to-r from-transparent via-[#b49bff]/40 to-transparent opacity-90'
+          : 'bg-gradient-to-r from-transparent via-[#b49bff]/25 to-transparent opacity-50'
+      }`}></div>
+
+      <div className="w-full h-full px-6 md:px-20 relative z-10">
+        <div className="flex items-center justify-between h-full w-full">
 
         {/* Left side - Navigation Menu */}
         <div className="flex items-center">
-          <div className="hidden md:flex items-center gap-1 bg-[#0300146e] px-4 py-2 rounded-full border border-[#7042f861] backdrop-blur-md hover:bg-[#0300148a] hover:border-[#7042f8aa] transition-all duration-300 shadow-lg shadow-[#2A0E61]/30">
+          <div className="hidden lg:flex items-center gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
-                className={`cursor-pointer transition-all duration-300 px-3 py-1.5 rounded-full relative group font-medium text-xs whitespace-nowrap ${
+                className={`relative cursor-pointer transition-all duration-300 px-4 py-2 font-medium text-sm whitespace-nowrap ${
                   activeSection === item.id
-                    ? 'text-white bg-gradient-to-r from-[#7042f8]/90 to-[#b49bff]/70 border border-[#7042f8] shadow-md shadow-[#7042f8]/50 scale-105'
-                    : 'text-gray-200 hover:text-white hover:bg-gradient-to-r hover:from-[#7042f8]/40 hover:to-[#b49bff]/30 hover:scale-105 border border-transparent'
+                    ? 'text-[#7042f8] font-bold'
+                    : 'text-gray-300 hover:text-[#7042f8]'
                 }`}
                 onClick={() => setActiveSection(item.id)}
               >
-                <span className="relative z-10 font-semibold tracking-wide">{item.name}</span>
+                <span className="font-semibold tracking-wide">{item.name}</span>
+              </Link>
+            ))}
+          </div>
 
-                {/* Active state glow */}
-                {activeSection === item.id && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#7042f8]/20 to-[#b49bff]/20 rounded-full blur-sm animate-pulse"></div>
-                )}
+          {/* Compact menu for tablet */}
+          <div className="hidden md:flex lg:hidden items-center gap-1">
+            {navItems.slice(0, 6).map((item) => (
+              <Link
+                key={item.id}
+                href={item.href}
+                className={`px-3 py-2 text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                  activeSection === item.id
+                    ? 'text-[#7042f8] font-bold'
+                    : 'text-gray-300 hover:text-[#7042f8]'
+                }`}
+                onClick={() => setActiveSection(item.id)}
+              >
+                <span className="font-semibold">{item.name}</span>
               </Link>
             ))}
           </div>
         </div>
 
-        {/* Center - Logo/Brand (placeholder for future) */}
-        <div className="flex-1 flex justify-center md:hidden">
-          <span className="text-white font-bold text-lg bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-            {personalInfo.name.split(' ').map(word => word[0]).join('')}
-          </span>
-        </div>
-
         {/* Right side - Social Links and Mobile Menu */}
-        <div className="flex items-center gap-4">
-          {/* Social Links - Hidden on mobile */}
-          <div className="hidden md:flex items-center gap-3">
+        <div className="flex items-center gap-3">
+          {/* Social Links */}
+          <div className="hidden md:flex items-center gap-2">
             {socialLinks.map((social) =>
               social.href ? (
                 <a
@@ -153,25 +179,21 @@ const Navbar = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative group hover:scale-110 transition-transform duration-300 p-2 rounded-full bg-[#7042f88b]/50 hover:bg-[#7042f8] border border-[#7042f861] hover:border-[#b49bff] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-[#030014]"
+                  className="relative group p-2 rounded-lg transition-all duration-300 hover:scale-110 hover:bg-[#7042f8]/20 focus:outline-none focus:ring-2 focus:ring-[#7042f8] focus:ring-offset-2 focus:ring-offset-[#030014]"
                   aria-label={`Visit ${social.name} profile`}
                 >
                   <svg
-                    width="18"
-                    height="18"
+                    width="20"
+                    height="20"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="text-white hover:text-[#b49bff] transition-colors duration-300"
+                    className="text-gray-300 group-hover:text-white transition-colors duration-300"
                   >
                     <path d={social.icon} />
                   </svg>
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#7042f8]/30 to-[#b49bff]/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
 
-                  {/* Tooltip */}
-                  <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-[#0300148a] text-white text-xs px-3 py-1.5 rounded-lg border border-[#7042f861] opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm whitespace-nowrap pointer-events-none z-50">
-                    {social.name}
-                    <div className="absolute top-[-4px] left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-[#0300148a]"></div>
-                  </div>
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#7042f8]/0 to-[#b49bff]/0 group-hover:from-[#7042f8]/20 group-hover:to-[#b49bff]/20 rounded-lg transition-all duration-300"></div>
                 </a>
               ) : null
             )}
@@ -180,16 +202,23 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-3 rounded-full bg-[#7042f88b] hover:bg-[#7042f8] transition-all duration-300 border border-[#7042f861] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-[#030014]"
+            className="md:hidden p-2 rounded-lg hover:bg-[#7042f8]/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7042f8] focus:ring-offset-2 focus:ring-offset-[#030014]"
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMobileMenuOpen}
           >
-            <div className="w-5 h-5 flex flex-col justify-center items-center space-y-1">
-              <span className={`w-4 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1' : ''}`}></span>
-              <span className={`w-4 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`w-4 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
+            <div className="w-6 h-6 flex flex-col justify-center items-center">
+              <span className={`w-5 h-0.5 bg-white transition-all duration-300 origin-center ${
+                isMobileMenuOpen ? 'rotate-45 translate-y-0.5' : 'translate-y-0'
+              }`}></span>
+              <span className={`w-5 h-0.5 bg-white transition-all duration-300 my-1 ${
+                isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
+              }`}></span>
+              <span className={`w-5 h-0.5 bg-white transition-all duration-300 origin-center ${
+                isMobileMenuOpen ? '-rotate-45 -translate-y-0.5' : 'translate-y-0'
+              }`}></span>
             </div>
           </button>
+        </div>
         </div>
       </div>
 
@@ -197,21 +226,21 @@ const Navbar = () => {
       {isClient && isMobileMenuOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div
-            className="absolute inset-0 bg-[#030014]/90 backdrop-blur-xl"
+            className="absolute inset-0 bg-[#030014]/90 backdrop-blur-xl animate-fadeIn"
             onClick={() => setIsMobileMenuOpen(false)}
           ></div>
 
-          <div className="absolute top-[75px] left-0 right-0 bg-[#030014]/95 backdrop-blur-2xl border-b border-[#7042f861] shadow-2xl shadow-[#2A0E61]/50">
+          <div className="absolute top-[85px] left-0 right-0 bg-[#030014]/95 backdrop-blur-2xl border-b border-[#7042f8]/30 shadow-2xl shadow-[#7042f8]/20 border-t border-[#7042f8]/10 animate-slideDown">
             <div className="flex flex-col space-y-2 p-6">
               {/* Navigation Links */}
               {navItems.map((item) => (
                 <Link
                   key={item.id}
                   href={item.href}
-                  className={`px-5 py-4 text-base font-medium rounded-xl transition-all duration-300 relative ${
+                  className={`px-5 py-4 text-base font-medium transition-all duration-300 ${
                     activeSection === item.id
-                      ? 'text-white bg-gradient-to-r from-[#7042f8]/80 to-[#b49bff]/60 border border-[#7042f8] shadow-lg shadow-[#7042f8]/50'
-                      : 'text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-[#7042f8]/30 hover:to-[#b49bff]/20 border border-transparent'
+                      ? 'text-[#7042f8] font-bold'
+                      : 'text-gray-300 hover:text-[#7042f8]'
                   }`}
                   onClick={() => {
                     setActiveSection(item.id);
@@ -226,8 +255,8 @@ const Navbar = () => {
               ))}
 
               {/* Social Links for Mobile */}
-              <div className="border-t border-[#7042f861] mt-4 pt-4">
-                <p className="text-gray-400 text-sm mb-3 px-5">Connect with me</p>
+              <div className="border-t border-[#7042f8]/30 mt-6 pt-6">
+                <p className="text-gray-400 text-sm mb-4 px-5 font-medium">Connect with me</p>
                 <div className="flex justify-center gap-4">
                   {socialLinks.map((social) =>
                     social.href ? (
@@ -236,19 +265,22 @@ const Navbar = () => {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="relative group hover:scale-110 transition-transform duration-300 p-3 rounded-full bg-[#7042f88b]/50 hover:bg-[#7042f8] border border-[#7042f861] hover:border-[#b49bff]"
+                        className="relative group p-3 rounded-xl bg-[#030014]/60 border border-[#7042f8]/20 backdrop-blur-xl hover:bg-[#7042f8]/20 hover:border-[#7042f8]/40 hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7042f8] focus:ring-offset-2 focus:ring-offset-[#030014]"
                         aria-label={`Visit ${social.name} profile`}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         <svg
-                          width="20"
-                          height="20"
+                          width="22"
+                          height="22"
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          className="text-white hover:text-[#b49bff] transition-colors duration-300"
+                          className="text-gray-300 group-hover:text-white transition-colors duration-300"
                         >
                           <path d={social.icon} />
                         </svg>
+
+                        {/* Glow effect for mobile */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#7042f8]/0 to-[#b49bff]/0 group-hover:from-[#7042f8]/20 group-hover:to-[#b49bff]/20 rounded-xl transition-all duration-300"></div>
                       </a>
                     ) : null
                   )}
@@ -258,7 +290,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      
+
       {/* Spacer to prevent content from hiding under navbar */}
       <div className="h-0 w-full pointer-events-none select-none" aria-hidden="true" />
     </nav>

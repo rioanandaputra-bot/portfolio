@@ -72,7 +72,7 @@ const HeroContent = () => {
         >
           <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5 animate-pulse" />
           <h1 className="Welcome-text text-[14px] font-medium">
-            ✨ {personalInfo.tagline}
+            {personalInfo.tagline}
           </h1>
         </motion.div>
 

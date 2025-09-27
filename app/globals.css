@@ -10,7 +10,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Account for fixed navbar */
+  scroll-padding-top: 85px; /* Account for fixed navbar */
 }
 
 body {
@@ -96,14 +96,34 @@ nav {
 }
 
 @keyframes perspective-float {
-  0%, 100% { 
+  0%, 100% {
     transform: translateY(0px) rotateX(0deg) rotateY(0deg);
   }
-  33% { 
+  33% {
     transform: translateY(-5px) rotateX(2deg) rotateY(1deg);
   }
-  66% { 
+  66% {
     transform: translateY(-8px) rotateX(-1deg) rotateY(-2deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -138,6 +158,14 @@ nav {
 
 .animate-perspective-float {
   animation: perspective-float 6s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* 3D perspective utilities */
